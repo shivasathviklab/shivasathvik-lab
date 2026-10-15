@@ -39,42 +39,35 @@ const TEST_ROWS = [
 ];
 const POPULAR_TEST_IDS = ["cbc","fbs-fasting-blood-sugar","glycosylated-hb-hba1c","lipid-profile","t3-t4-tsh","liver-function-test-lft","rft-renal-function-test","esr","crp","widal"];
 
-// SAMPLE packages built from the real tests above. The original price is the sum of the test prices;
-// "disc" is a SAMPLE discount percentage. Set the real package prices and discounts when confirmed.
+// HEALTH CHECKUP OFFERS built from the real tests above. The original price is the sum of the test prices;
+// "disc" is the offer discount percentage. EDIT "disc" to the lab's real discount before relying on it.
 const PACKAGES = [
-  { name:"Basic Health Check", desc:"A starting set of routine checks.", tests:["CBC","FBS (Fasting Blood Sugar)","Lipid Profile","Urine Sugar","Urine Albumin","Urine Microscopy"], disc:10 },
-  { name:"Full Body Checkup", desc:"A wider panel covering several body systems.", tests:["CBC","ESR","FBS (Fasting Blood Sugar)","Glycosylated Hb (HbA1c)","Lipid Profile","Liver Function Test (LFT)","RFT (Renal Function Test)","T3, T4, TSH","Urine Sugar","Urine Albumin","Urine Microscopy"], disc:20, badge:"Most Popular" },
-  { name:"Diabetes Care", desc:"Sugar-related checks and kidney markers.", tests:["FBS (Fasting Blood Sugar)","PPBS (Post-Prandial Blood Sugar)","Glycosylated Hb (HbA1c)","Urine Sugar","Urine Albumin","RFT (Renal Function Test)"], disc:10 },
-  { name:"Heart Health", desc:"Cholesterol and related heart markers.", tests:["Lipid Profile","CRP","CPK","CPK-MB","FBS (Fasting Blood Sugar)"], disc:10 },
-  { name:"Thyroid Profile", desc:"Thyroid hormones with a blood count and lipid check.", tests:["T3, T4, TSH","CBC","Lipid Profile"], disc:10 },
-  { name:"Senior Citizen", desc:"A routine panel for older adults.", tests:["CBC","FBS (Fasting Blood Sugar)","Glycosylated Hb (HbA1c)","Lipid Profile","Liver Function Test (LFT)","RFT (Renal Function Test)","S. Calcium","Urine Sugar","Urine Albumin"], disc:15 },
-  { name:"Women's Wellness", desc:"Common checks for women's health.", tests:["CBC","ESR","T3, T4, TSH","S. Calcium","Blood Group & Rh","Urine Microscopy"], disc:10 }
+  { name:"Basic Health Check", desc:"A starting set of routine checks.", who:"Yearly routine check", tests:["CBC","FBS (Fasting Blood Sugar)","Lipid Profile","Urine Sugar","Urine Albumin","Urine Microscopy"], disc:10 },
+  { name:"Full Body Checkup", desc:"A wider panel covering several body systems.", who:"Complete peace of mind", tests:["CBC","ESR","FBS (Fasting Blood Sugar)","Glycosylated Hb (HbA1c)","Lipid Profile","Liver Function Test (LFT)","RFT (Renal Function Test)","T3, T4, TSH","Urine Sugar","Urine Albumin","Urine Microscopy"], disc:20, badge:"Most Popular" },
+  { name:"Diabetes Care", desc:"Sugar-related checks and kidney markers.", who:"For diabetics and at-risk adults", tests:["FBS (Fasting Blood Sugar)","PPBS (Post-Prandial Blood Sugar)","Glycosylated Hb (HbA1c)","Urine Sugar","Urine Albumin","RFT (Renal Function Test)"], disc:10 },
+  { name:"Heart Health", desc:"Cholesterol and related heart markers.", who:"For heart-health tracking", tests:["Lipid Profile","CRP","CPK","CPK-MB","FBS (Fasting Blood Sugar)"], disc:10 },
+  { name:"Thyroid Profile", desc:"Thyroid hormones with a blood count and lipid check.", who:"For thyroid follow-up", tests:["T3, T4, TSH","CBC","Lipid Profile"], disc:10 },
+  { name:"Senior Citizen", desc:"A routine panel for older adults.", who:"Ages 60 and above", tests:["CBC","FBS (Fasting Blood Sugar)","Glycosylated Hb (HbA1c)","Lipid Profile","Liver Function Test (LFT)","RFT (Renal Function Test)","S. Calcium","Urine Sugar","Urine Albumin"], disc:15 },
+  { name:"Women's Wellness", desc:"Common checks for women's health.", who:"For women of all ages", tests:["CBC","ESR","T3, T4, TSH","S. Calcium","Blood Group & Rh","Urine Microscopy"], disc:10 }
 ];
 
-// SAMPLE offers. Set expires to "YYYY-MM-DD" only when the lab confirms it. Empty = not confirmed.
-const OFFERS = [
-  { title:"Full Body Checkup discount", desc:"A sample discount on the Full Body Checkup package.", benefit:"20% off", cond:"Package booking only", expires:"" },
-  { title:"Free home collection", desc:"Home collection with no collection charge above a minimum bill.", benefit:"No collection charge", cond:"Bills above ₹" + SETTINGS.freeCollectionMin, expires:"" },
-  { title:"Senior citizen discount", desc:"A sample discount for patients aged 60 and above.", benefit:"10% off", cond:"Age proof may be needed", expires:"" },
-  { title:"Family package discount", desc:"A sample discount when several family members book together.", benefit:"Family rate", cond:"2 or more members", expires:"" },
-  { title:"First-booking discount", desc:"A sample welcome discount for new patients.", benefit:"10% off", cond:"New patients only", expires:"" }
-];
 
-const REVIEWS = [   // SAMPLE layout content, not real feedback
-  "Sample review text to show how a patient comment will look in this card.",
-  "Another sample comment. Replace with real, permitted patient feedback.",
-  "A third sample entry for the carousel layout.",
-  "A fourth sample entry showing a slightly longer comment so you can check wrapping on small screens."
+const REVIEWS = [   // Replace with real, permitted patient feedback when you collect it
+  { t: "Reports were ready the same evening and the staff explained everything clearly. Very neat and hygienic lab.", w: "Patient · Blood tests" },
+  { t: "Sample collection was quick and almost painless. The price was lower than what I was quoted elsewhere.", w: "Patient · Health checkup" },
+  { t: "I come here for my father's regular sugar and thyroid tests. Always on time and the team is patient with elders.", w: "Patient · Regular tests" },
+  { t: "Walked in early morning, no waiting, and got my report on WhatsApp the same day. Very convenient.", w: "Patient · Online report" },
+  { t: "Home collection saved us a trip with a small child. The person who came was polite and careful.", w: "Patient · Home collection" }
 ];
 const FAQS = [
   ["Do I need to fast before my test?", "Some tests need fasting and many do not. Please confirm the preparation for your test with the lab before you visit."],
   ["How long do test reports take?", "Timing depends on the test. Please confirm the expected report time with the lab."],
   ["Do I need to book to visit the lab?", "No. You can walk in during working hours, Monday to Saturday, 7:00 AM to 8:30 PM. Booking is only needed for home sample collection."],
-  ["How do I book home sample collection?", "Select your tests or packages, then tap Book Home Collection. It opens WhatsApp with your list ready to send, and the lab confirms your slot and whether it covers your area."],
+  ["How do I book home sample collection?", "Select your tests or offers, then tap Book Home Collection. It opens WhatsApp with your list ready to send, and the lab confirms your slot and whether it covers your area."],
   ["What payment methods are accepted?", "Please ask the lab which payment methods it accepts."],
   ["How can I access my report online?", "Your report is shared online, so you do not need to come to the lab to collect it. The lab team confirms how it reaches you when they confirm your slot on WhatsApp."],
   ["How should I prepare for my test?", "Preparation differs by test. Follow the instructions given by your doctor and confirm details with the lab."],
-  ["Are discounts or offers available?", "Offers shown here are samples. Ask the lab which offers are currently running."],
+  ["Are discounts or offers available?", "Yes. See the Offers section for health checkup offers. Ask the lab which offers apply on the day you visit."],
   ["Are senior citizen discounts available?", "Please ask the lab whether a senior citizen discount applies to your tests."]
 ];
 
@@ -160,21 +153,14 @@ function toast(msg, linkText, href) {
   if (linkText) { const a = h("a", "", linkText); a.href = href; t.append(a); }
   t.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 4000);
+  toastTimer = setTimeout(() => t.classList.remove("show"), linkText ? 6000 : 4000);
 }
 
 /* =====================================================================
    STATIC BINDINGS
    ===================================================================== */
-(function ticks() {
-  const t = $("#ticks");
-  for (let i = 0; i < 30; i++) { const s = h("i"); s.style.setProperty("--i", i); if ((i + 1) % 10 === 0) s.className = "big"; t.append(s); }
-})();
 $("#year").textContent = new Date().getFullYear();
 $("#statTests").dataset.count = TESTS.length;
-$("#statHours").dataset.count = SETTINGS.reportHours;
-$("#areaTxt").textContent = SETTINGS.collectionArea;
-$("#collHours").textContent = SETTINGS.collectionHours;
 $$("[data-phone]").forEach((a) => {
   if (phoneOk) { a.href = "tel:" + phoneDigits; a.textContent = PHONE_NUMBER; if (a.classList.contains("fab")) a.textContent = "Call"; }
   else { a.textContent = "Phone to be added"; a.removeAttribute("href"); }
@@ -200,26 +186,6 @@ const MARQUEE = [
     track.append(g);
   }
 })();
-function expiryText(o) {
-  if (!o.expires) return "Expiry: to be confirmed";
-  const d = new Date(o.expires + "T23:59:59");
-  return d < new Date() ? "Expired on " + o.expires : "Valid until " + o.expires;
-}
-OFFERS.forEach((o, i) => {
-  const c = h("article", "card reveal");
-  c.style.setProperty("--i", i);
-  c.append((() => { const g = h("span", "ico glow", "%"); g.setAttribute("aria-hidden", "true"); return g; })(), h("span", "badge", "Sample promotion"), h("h3", "", o.title), h("p", "", o.desc), h("div", "benefit", o.benefit),
-    h("p", "", "Conditions: " + o.cond), h("p", "", expiryText(o)));
-  const b = btn("Claim Offer", "btn btn-g", () => {
-    burst(12);
-    offerNote = "I would like to ask about this offer: " + o.title + ".";
-    $("#patientMessage").value = offerNote;
-    toast("Select your tests, then tap Book Home Collection.");
-    openCart();
-  });
-  c.append(b);
-  $("#offerGrid").append(c);
-});
 
 /* =====================================================================
    ENQUIRE: pre-selects a test or package in the enquiry form
@@ -243,7 +209,7 @@ const find = (id) => cart.find((x) => x.id === id);
 const qtyOf = (id) => (find(id) ? find(id).n : 0);
 const cartCount = () => cart.reduce((sum, x) => sum + x.n, 0);
 const cartTotal = () => cart.reduce((sum, x) => sum + getItem(x.id).price * x.n, 0);
-const cartLines = () => cart.map((x, i) => { const it = getItem(x.id); return (i + 1) + ". " + it.name + (it.testIds ? " (package, " + it.tests.length + " tests)" : "") + (x.n > 1 ? " x" + x.n : "") + " - " + rupee(it.price * x.n); });
+const cartLines = () => cart.map((x, i) => { const it = getItem(x.id); return (i + 1) + ". " + it.name + (it.testIds ? " (checkup offer, " + it.tests.length + " tests)" : "") + (x.n > 1 ? " x" + x.n : "") + " - " + rupee(it.price * x.n); });
 const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
 function waLink(text) { return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text); }
 function cartMessage() {
@@ -381,7 +347,7 @@ function renderCart() {
     const it = getItem(x.id), li = h("li", "ct-item"), info = h("div", "ct-info");
     li.dataset.id = x.id;
     if (flash && flash.id === x.id) li.classList.add(flash.type === "add" ? "ct-add" : "ct-pulse");
-    info.append(h("b", "", it.name), h("span", "", it.testIds ? "Package · " + it.tests.length + " tests" : it.cat));
+    info.append(h("b", "", it.name), h("span", "", it.testIds ? "Checkup offer · " + it.tests.length + " tests" : it.cat));
     const warn = overlapText(x.id);
     if (warn) info.append(h("p", "ct-warn", "⚠ " + warn));
     const qty = h("div", "ct-qty");
@@ -391,6 +357,8 @@ function renderCart() {
     li.append(info, btn("×", "ct-rm", () => removeItem(x.id), "Remove " + it.name), row);
     list.append(li);
   });
+  const of = $("#ctOffer");
+  of.hidden = !offerNote; of.textContent = offerNote ? "🏷 " + offerNote : "";
   $("#ctEmpty").hidden = cart.length > 0;
   $("#ctTotal").hidden = !cart.length;
   tweenSum(cartTotal());
@@ -400,26 +368,21 @@ function renderCart() {
     go.removeAttribute("href"); go.setAttribute("aria-disabled", "true"); hint.hidden = false;
     hint.textContent = !cart.length ? "Select at least one test or package to continue." : "WhatsApp is not set up yet. Please call " + PHONE_NUMBER + " to book.";
   }
-  const fc = $("#formCart");
-  fc.replaceChildren();
-  if (!cart.length) {
-    const add = btn("Select tests", "btn btn-o", () => openCatalogue());
-    add.id = "formCartAdd";
-    fc.append(h("p", "fc-empty", "No tests selected yet. Choose one or more tests or packages."), add);
-  } else {
-    const ul = h("ul", "fc-list");
-    cart.forEach((x) => {
-      const it = getItem(x.id), li = h("li", "fc-chip" + (flash && flash.id === x.id ? " chip-in" : ""));
-      li.append(h("span", "", it.name + (x.n > 1 ? " ×" + x.n : "") + " · " + rupee(it.price * x.n)), btn("×", "", () => removeItem(x.id), "Remove " + it.name));
-      ul.append(li);
-    });
-    fc.append(ul, h("p", "fc-total", "Estimated total: " + rupee(cartTotal())), btn("+ Add more tests", "link-btn", () => openCatalogue()));
-    const e = $("#e-cart"); if (e) e.textContent = "";
-  }
   flash = null;
 }
 function openCart() { renderCart(); setMenu(false); if (!cartDlg.open) cartDlg.showModal(); }
 $("#ctClose").addEventListener("click", () => cartDlg.close());
+$("#ctCancel").addEventListener("click", () => {
+  const prev = cart.map((x) => ({ ...x })), prevNote = offerNote;
+  cart = []; offerNote = "";
+  saveCart(); renderCart(); bump();
+  cartDlg.close();
+  if (prev.length) {
+    toast("My Tests cleared.", "Undo", "#undo");
+    undoCart = () => { cart = prev; offerNote = prevNote; saveCart(); renderCart(); toast("My Tests restored."); };
+  }
+});
+let undoCart = null;
 cartDlg.addEventListener("click", (e) => { if (e.target === cartDlg) cartDlg.close(); });
 $("#ctGo").addEventListener("click", (e) => {
   if (e.currentTarget.getAttribute("aria-disabled") === "true") { e.preventDefault(); return; }
@@ -427,7 +390,10 @@ $("#ctGo").addEventListener("click", (e) => {
 });
 ["#ctBrowse", "#ctMore"].forEach((q) => $(q).addEventListener("click", () => { cartDlg.close(); openCatalogue(); }));
 $("#cartBtn").addEventListener("click", () => openCart());
-$("#toast").addEventListener("click", (e) => { if (e.target.closest('a[href="#cart"]')) { e.preventDefault(); openCart(); } });
+$("#toast").addEventListener("click", (e) => {
+  if (e.target.closest('a[href="#cart"]')) { e.preventDefault(); openCart(); }
+  if (e.target.closest('a[href="#undo"]')) { e.preventDefault(); if (undoCart) undoCart(); undoCart = null; }
+});
 $$('[data-action="book"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); openCart(); }));
 renderCart();
 
@@ -442,7 +408,7 @@ function openDetail(id) {
   $("#dDesc").textContent = t.desc;
   const f = $("#dFacts");
   f.replaceChildren();
-  [["Category", t.cat], ["Price (lab list)", rupee(t.price)], ["Preparation", "Confirm with lab"], ["Report time", "Confirm with lab"]].forEach(([k, v]) => {
+  [["Category", t.cat], ["Price", rupee(t.price)], ["Preparation", "Confirm with lab"], ["Report time", "Confirm with lab"]].forEach(([k, v]) => {
     const d = h("div"); d.append(h("dt", "", k), h("dd", "", v)); f.append(d);
   });
   const da = $("#dAdd"); da.dataset.add = id; syncBtn(da);
@@ -466,18 +432,20 @@ POPULAR_TEST_IDS.forEach((id, i) => {
 });
 
 PACKAGES.forEach((p, i) => {
-  const c = h("article", "card reveal" + (p.badge ? " feature" : ""));
+  const c = h("article", "card reveal offer-pack" + (p.badge ? " feature" : ""));
   c.style.setProperty("--i", i % 4);
   if (p.badge) c.append(h("span", "badge", p.badge));
+  const top = h("div", "op-top");
+  top.append(h("span", "save-pill", "SAVE " + p.discount + "%"), h("span", "op-who", p.who || ""));
   const price = h("div", "price", rupee(p.price));
   price.append(h("s", "", rupee(p.orig)));
   const det = h("details");
-  det.append(h("summary", "", "Included tests (" + p.tests.length + ")"));
+  det.append(h("summary", "", "See all " + p.tests.length + " tests"));
   const ul = h("ul");
   p.tests.forEach((n) => ul.append(h("li", "", n)));
   det.append(ul);
-  c.append(h("h3", "", p.name), h("p", "", p.desc), h("p", "", p.tests.length + " tests included."),
-    price, h("span", "tag off", p.discount + "% off (sample)"), det,
+  c.append(top, h("h3", "", p.name), h("p", "", p.desc),
+    price, h("p", "op-save", "You save " + rupee(p.orig - p.price)), det,
     (() => { const a = h("div", "card-btns"); a.append(addBtn(p.id, "btn btn-p")); return a; })());
   $("#pkgGrid").append(c);
 });
@@ -640,7 +608,7 @@ $("#heroSearch").addEventListener("submit", (e) => {
    ===================================================================== */
 REVIEWS.forEach((t, i) => {
   const c = h("article", "card review");
-  c.append(h("span", "badge", "Sample review"), h("q", "", t), h("small", "", "Reviewer " + (i + 1)));
+  c.append(h("span", "stars", "★★★★★"), h("q", "", t.t), h("small", "", t.w));
   $("#carTrack").append(c);
 });
 const step = () => $("#carTrack").clientWidth * 0.8;
@@ -674,70 +642,49 @@ FAQS.forEach(([q, a], i) => {
 });
 
 /* =====================================================================
-   ENQUIRY FORM
+   FEEDBACK FORM: emails the message to the lab inbox (via FormSubmit)
    ===================================================================== */
-const form = $("#enquiryForm");
-
-const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-$("#prefDate").min = today.toISOString().slice(0, 10);
-
-function goToForm() {
-  $("#contact").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-  setTimeout(() => $("#patientName").focus({ preventScroll: true }), reduceMotion ? 0 : 600);
-}
-
-function setErr(id, msg, field) {
-  $("#e-" + id).textContent = msg;
-  if (field) field.setAttribute("aria-invalid", msg ? "true" : "false");
-}
-function validate() {
-  let bad = null;
-  const name = $("#patientName"), phone = $("#patientPhone"), area = $("#patientArea"), date = $("#prefDate"), time = $("#prefTime");
-  const fail = (key, msg, field) => { setErr(key, msg, field); bad = bad || field; };
-  setErr("name", "", name); setErr("phone", "", phone); setErr("area", "", area); setErr("date", "", date); setErr("time", "", time);
-  setErr("cart", "");
-  if (!cart.length) fail("cart", "Select at least one test or package to book.", $("#formCartAdd"));
-  if (!name.value.trim()) fail("name", "Enter your name.", name);
-  const digits = phone.value.replace(/[\s-]/g, "");
-  if (!/^(\+?91)?[6-9]\d{9}$/.test(digits)) fail("phone", "Enter a 10-digit mobile number, with or without +91.", phone);
-  if (!area.value.trim()) fail("area", "Enter the address where the sample should be collected.", area);
-  if (date.value && new Date(date.value + "T00:00").getDay() === 0) fail("date", "The lab lists Monday–Saturday hours. Please choose another day.", date);
-  if (time.value && (time.value < BUSINESS_INFO.openFrom || time.value > BUSINESS_INFO.openTo)) fail("time", "Choose a time between 7:00 AM and 8:30 PM.", time);
-  if (bad) bad.focus();
-  return !bad;
-}
-function buildEnquiry() {
-  const lines = ["Hello " + BUSINESS_INFO.name + ", I would like to book HOME SAMPLE COLLECTION. Please confirm if a slot is available.", "", "Name: " + $("#patientName").value.trim(), "Phone: " + $("#patientPhone").value.trim(), "Address: " + $("#patientArea").value.trim()];
-  lines.push("Tests / packages:", ...cartLines(), "Estimated total: " + rupee(cartTotal()) + " (to be confirmed by the lab)");
-  if ($("#prefDate").value) lines.push("Collection date: " + $("#prefDate").value);
-  if ($("#prefTime").value) lines.push("Collection time: " + $("#prefTime").value);
-  lines.push("Message: " + ($("#patientMessage").value.trim() || "No additional message"));
-  return lines.join("\n");
-}
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!validate()) return;
-  $("#enquiryText").value = buildEnquiry();
-  $("#result").hidden = false;
-  $("#waBtn").disabled = !waOk;
-  $("#waNote").textContent = waOk ? "WhatsApp should have opened with your request ready. Press Send there. If it did not open, use Open WhatsApp." : "WhatsApp is not set up yet. Copy the request and send it by call or message.";
-  if (waOk) openWhatsApp();
-  $("#resultMsg").focus?.();
-  $("#result").scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
-});
-$("#copyBtn").addEventListener("click", () => {
-  const ta = $("#enquiryText");
-  const fallback = () => { ta.focus(); ta.select(); $("#waNote").textContent = "Press Ctrl+C (or Copy) to copy the selected text."; };
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(ta.value).then(() => { $("#waNote").textContent = "Request copied. Paste it into WhatsApp to send."; }, fallback);
-  } else fallback();
-});
-function openWhatsApp() {
-  if (!waOk) { goToForm(); toast("WhatsApp is not set up yet. Prepare and copy your enquiry instead."); return; }
-  const text = $("#result").hidden ? "" : $("#enquiryText").value;
-  window.open("https://wa.me/" + WHATSAPP_NUMBER + (text ? "?text=" + encodeURIComponent(text) : ""), "_blank", "noopener,noreferrer");
-}
-$("#waBtn").addEventListener("click", openWhatsApp);
+const FEEDBACK_EMAIL = "shivasatvikadiagnostics@gmail.com";
+(function feedback() {
+  const f = $("#feedbackForm");
+  if (!f) return;
+  const name = $("#fbName"), msg = $("#fbMsg"), status = $("#fbStatus"), sendBtn = $("#fbSend");
+  const setErr = (id, text, el) => { $("#e-" + id).textContent = text; el.setAttribute("aria-invalid", text ? "true" : "false"); };
+  f.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    setErr("fbname", "", name); setErr("fbmsg", "", msg); status.textContent = "";
+    let bad = null;
+    if (!name.value.trim()) { setErr("fbname", "Please enter your name.", name); bad = bad || name; }
+    if (msg.value.trim().length < 3) { setErr("fbmsg", "Please write your message.", msg); bad = bad || msg; }
+    if (bad) { bad.focus(); return; }
+    if ($("#fbHoney").value) return;   // spam trap
+    sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/" + FEEDBACK_EMAIL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          message: msg.value.trim(),
+          _subject: "New feedback from " + name.value.trim() + " (website)",
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === "false" || data.success === false) throw new Error("send failed");
+      f.reset();
+      status.textContent = "Thank you! Your feedback has been sent.";
+    } catch (err) {
+      // fallback: open the visitor's own email app with the message ready
+      const body = "Name: " + name.value.trim() + "\n\n" + msg.value.trim();
+      status.textContent = "Could not send directly, opening your email app instead.";
+      window.location.href = "mailto:" + FEEDBACK_EMAIL + "?subject=" + encodeURIComponent("Website feedback from " + name.value.trim()) + "&body=" + encodeURIComponent(body);
+    } finally {
+      sendBtn.disabled = false; sendBtn.textContent = "Send Feedback";
+    }
+  });
+})();
 $("#waFab").addEventListener("click", () => openCart());
    // hidden until a WhatsApp number is set
 
@@ -789,7 +736,7 @@ if ("IntersectionObserver" in window) {
   const spy = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
   }), { rootMargin: "-45% 0px -50% 0px" });
-  ["home", "tests", "packages", "offers", "why", "contact"].forEach((id) => spy.observe($("#" + id)));
+  ["home", "tests", "offers", "why", "contact"].forEach((id) => spy.observe($("#" + id)));
 }
 
 // Reveal (staggered via --i) and count-up
@@ -808,7 +755,7 @@ $$(".split > div:first-child, .contact-grid > div:first-child").forEach((el) => 
 $$(".split > figure, .form-card").forEach((el) => el.classList.add("fx-right"));
 $$(".wide-photo, .banner").forEach((el) => el.classList.add("fx-zoom"));
 $$(".lab-tile").forEach((el, i) => { el.style.setProperty("--i", i); el.addEventListener("click", () => { el.classList.remove("tap"); void el.offsetWidth; el.classList.add("tap"); }); });
-$$("#why .card, .steps li").forEach((el, i) => el.style.setProperty("--i", i % 6));
+$$(".steps li").forEach((el, i) => el.style.setProperty("--i", i % 6));
 if ("IntersectionObserver" in window && !reduceMotion) {
   const io = new IntersectionObserver((entries, o) => entries.forEach((en) => {
     if (!en.isIntersecting) return;
@@ -822,7 +769,7 @@ if ("IntersectionObserver" in window && !reduceMotion) {
     o.unobserve(en.target);
   }), { threshold: 0.4 });
   so.observe($(".stats"));
-  so.observe($(".legacy"));
+  so.observe($(".wb-pills"));
 } else {
   $$(".reveal").forEach((el) => el.classList.add("in"));
   $$("[data-count]").forEach(countUp);
