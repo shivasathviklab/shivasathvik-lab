@@ -1242,3 +1242,37 @@ body{background:#FFFDF6;color:var(--ink)}
 .wb-ico{background:var(--dk2);border-color:var(--dk2);color:var(--gold)}
 .wb-card:hover .wb-ico{background:var(--gold);color:var(--dk)}
 @media(max-width:640px){.wb-top{padding:60px 0 40px}.wb-body{padding-top:36px;padding-bottom:60px}}
+/* ---- Catalogue tiles (all screens) ---- */
+.cat-note{margin:10px 0 0}
+.cat-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;font:inherit;color:var(--navy);transition:border-color .2s,transform .2s}
+.tile:hover{border-color:var(--teal);transform:translateY(-2px)}
+.tile .ico{width:40px;height:40px;margin-bottom:10px;font-size:.95rem}
+.tile b{font-family:var(--head);font-size:1rem}
+.tile-n{font-size:.8rem;color:var(--muted)}
+.cat-head{display:flex;align-items:center;gap:12px;margin:16px 0 4px;flex-wrap:wrap}
+.cat-head strong{font-family:var(--head);font-size:1.15rem;color:var(--navy)}
+.back-btn{padding:8px 14px;min-height:40px}
+.row{grid-template-columns:1fr auto auto}
+.row .rb{padding:8px 16px;white-space:nowrap}
+.show-more{width:100%;margin-top:12px}
+.stat-grid{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.stat-grid>div:last-child{grid-column:auto}}
+@media(max-width:640px){
+  .cat-tiles{grid-template-columns:1fr 1fr;gap:10px}
+  .tile{padding:12px}
+  .tile .ico{width:34px;height:34px;margin-bottom:6px}
+  .tile b{font-size:.92rem}
+  .row{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:none;gap:10px;padding:10px 12px}
+  .row .name,.row .rp,.row .rb{grid-area:auto}
+  .row .name{font-size:.92rem}
+  .row .rb{min-height:38px;padding:6px 12px;font-size:.85rem}
+}
+.row .name{text-align:left}
+.row .name .link-btn{text-align:left}
+.row .rp{font-size:1.05rem}
+@media(max-width:640px){.row .rp{font-size:.98rem}.tile-n{font-size:.76rem}}
+
+.wb-card.key{border-top:4px solid var(--gold)}
+.title-link::after{content:"i";display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:8px;border-radius:50%;background:var(--teal-d);color:#fff;font:italic 700 .8rem/1 Georgia,"Times New Roman",serif;vertical-align:middle;transition:transform .2s,background .2s}
+.title-link:hover::after{transform:scale(1.12);background:var(--navy)}

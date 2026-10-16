@@ -66,7 +66,7 @@
       <div class="hero-main">
         <h1>Your Health, Our Priority.</h1>
         <p class="tagline">Accurate Tests. Caring Service.</p>
-        <p class="lead">Walk in to our Chikkaballapur lab anytime during working hours. No booking needed.</p>
+        <p class="lead">Blood tests, X-ray imaging and health checkups in Chikkaballapur.</p>
       </div>
       <div class="hero-legacy" aria-hidden="true">
         <p class="lg-eyebrow">30+ years of experience</p>
@@ -74,10 +74,6 @@
         <div class="ticks" id="heroTicks"></div>
         <div class="tick-lbl"><span>Year 1</span><span>10</span><span>20</span><span>30+</span></div>
       </div>
-    </div>
-    <div class="hero-note">
-      <span class="hn-ico" aria-hidden="true">✆</span>
-      <p><strong>Can't come to the lab? Stay home.</strong> Select your tests and tap Book Home Collection. We collect the sample at your home and send your report online.</p>
     </div>
     <form class="hero-search" id="heroSearch" role="search">
       <label class="sr" for="heroQ">Search for a test</label>
@@ -87,14 +83,8 @@
     </form>
     <div class="hero-btns">
       <a class="btn btn-p" href="#contact" data-action="book">Book Home Collection</a>
-      <a class="btn btn-o-l" href="#contact">Walk In, No Booking Needed</a>
+      <a class="btn btn-o-l" href="https://www.google.com/maps/dir/?api=1&destination=13.4331349,77.7250213" target="_blank" rel="noopener noreferrer">Walk In, No Booking Needed</a>
     </div>
-    <ul class="trust">
-      <li><span aria-hidden="true">⌂</span> Home Sample Collection</li>
-      <li><span aria-hidden="true">▤</span> Online Reports</li>
-      <li><span aria-hidden="true">★</span> 30+ Years of Experience</li>
-      <li><span aria-hidden="true">✔</span> 1 Million+ Reports Issued</li>
-    </ul>
   </div>
 </section>
 
@@ -108,10 +98,6 @@
       <svg class="price-tag" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M24 2v6" stroke="#E8C547" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M10 14h28a2 2 0 0 1 2 2v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2z" fill="#E8C547"/><circle cx="24" cy="21" r="3" fill="#0E3A31"/><text x="24" y="40" text-anchor="middle" font-size="17" font-weight="700" fill="#0E3A31" font-family="sans-serif">&#8377;</text></svg>
       <b class="pop-t">Best Price</b><span>in Chikkaballapur</span>
     </div>
-    <div class="stat-hl stat-walk">
-      <i class="live-dot" aria-hidden="true"></i>
-      <b class="pop-t">Walk in</b><span>No booking needed<br>Mon–Sat, 7 AM–8:30 PM</span>
-    </div>
   </div>
 </section>
 
@@ -120,15 +106,15 @@
   <div class="wrap">
     <div class="athome-card reveal">
       <div class="athome-t">
-        <p class="lg-eyebrow">No need to come to the lab</p>
-        <h2 id="athomeH">Don't want to come? Do it all from home.</h2>
-        <p>Select your tests, tap Book Home Collection and confirm your slot on WhatsApp. Our team collects the sample at your home, and your report comes to you online.</p>
-        <a class="btn btn-g" href="#contact" data-action="book">Book Home Collection</a>
+        <p class="lg-eyebrow">No Need to Visit the Lab!</p>
+        <h2 id="athomeH">Get Your Tests Done from the Comfort of Your Home</h2>
+        <p>Booking is simple! Choose your tests, book a home collection slot on WhatsApp, and our team will visit your home to collect your sample. Your reports will be sent to you online.</p>
+        <a class="btn btn-g" href="#contact" data-action="book">Book Home Collection on WhatsApp</a>
       </div>
       <ol class="athome-steps">
-        <li><b>1</b><div><h3>Select your tests</h3><p>Add them to My Tests, then Book Home Collection.</p></div></li>
-        <li><b>2</b><div><h3>We collect at home</h3><p>Our team comes to you for the sample.</p></div></li>
-        <li><b>3</b><div><h3>Get report online</h3><p>No trip to the lab to collect it.</p></div></li>
+        <li><b>1</b><div><h3>Choose Your Tests</h3><p>Select the tests you need and add them to My Tests.</p></div></li>
+        <li><b>2</b><div><h3>Book Your Home Collection</h3><p>Tap Book Home Collection and confirm your preferred time slot on WhatsApp.</p></div></li>
+        <li><b>3</b><div><h3>Get Your Reports Online</h3><p>Our team collects your sample at home, and you receive your reports online — no need to visit the lab.</p></div></li>
       </ol>
     </div>
   </div>
@@ -138,7 +124,7 @@
 <section class="sec" id="popular">
   <div class="wrap">
     <div class="pop-head">
-      <div class="sec-h"><h2>Popular tests</h2><p>Commonly requested tests. Visiting the lab needs no booking; booking is only for home sample collection.</p></div>
+      <div class="sec-h"><h2>Popular tests</h2><p>Commonly requested tests.</p></div>
       <div class="pop-nav">
         <button class="pop-arrow" id="popPrev" type="button" aria-label="Previous tests">‹</button>
         <button class="pop-arrow" id="popNext" type="button" aria-label="Next tests">›</button>
@@ -148,8 +134,6 @@
   </div>
 </section>
 
-<details class="tests-dropdown" id="testsDropdown">
-  <summary>View All Tests</summary>
 
 <!-- 5. CATALOGUE -->
 <section class="sec alt" id="tests">
@@ -161,14 +145,15 @@
           <label class="sr" for="q">Search for a test</label>
           <input id="q" type="search" placeholder="Search for a test…" autocomplete="off">
         </div>
-        <div class="tabs" id="tabs" role="tablist" aria-label="Test categories"></div>
+        <p class="small cat-note">Some tests need fasting. Follow your doctor's advice and confirm preparation and report time with the lab.</p>
+        <div class="cat-tiles" id="tiles"></div>
+        <div class="cat-head" id="catHead" hidden></div>
         <p class="count" id="count" aria-live="polite"></p>
-        <div id="results" role="tabpanel"></div>
+        <div id="results" role="region" aria-label="Test list"></div>
       </div>
     </div>
   </div>
 </section>
-</details>
 
 <!-- 6. OFFERS (health checkup offers + other savings) -->
 <section class="sec offers" id="offers">
@@ -190,22 +175,17 @@
     <div class="wb-top"><div class="wrap">
     <div class="wb-head reveal">
       <h2>Why choose Shiva Sathvik?</h2>
-      <p>Three decades of accurate results, honest prices and a caring team, right here in Chikkaballapur.</p>
-    </div>
-    <div class="wb-pills reveal" style="--i:1">
-      <div><b data-count="30" data-suffix="+">30+</b><span>Years of trust</span></div>
-      <div><b class="wb-long" data-count="1" data-suffix=" Million+">1 Million+</b><span>Reports issued</span></div>
-      <div><b>Best Price</b><span>in Chikkaballapur</span></div>
+      <p>Accurate results, honest prices and a caring team, right here in Chikkaballapur.</p>
     </div>
     </div></div>
     <div class="wrap wb-body">
     <div class="wb-grid">
+      <article class="wb-card reveal key" style="--i:1"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><h3>30+ years of experience</h3><p>A long-standing, trusted name in Chikkaballapur.</p></article>
+      <article class="wb-card reveal key" style="--i:2"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><h3>Online reports</h3><p>Get your report online, no trip back to the lab.</p></article>
+      <article class="wb-card reveal key" style="--i:5"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span><h3>Home sample collection</h3><p>Book collection from your home on WhatsApp.</p></article>
       <article class="wb-card reveal" style="--i:0"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3M9 13c6.667 0 6.667-10 0-10"/></svg></span><h3>Affordable testing</h3><p>Tests priced with your family's budget in mind.</p></article>
-      <article class="wb-card reveal" style="--i:1"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><h3>30+ years of experience</h3><p>A long-standing, trusted name in Chikkaballapur.</p></article>
-      <article class="wb-card reveal" style="--i:2"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><h3>Online reports</h3><p>Get your report online, no trip back to the lab.</p></article>
       <article class="wb-card reveal" style="--i:3"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3c3.5 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 2.5-6.5 6-11z"/><path d="M9.5 14.5l2 2 3.5-4"/></svg></span><h3>Hygienic handling</h3><p>Every sample is collected and handled with care.</p></article>
       <article class="wb-card reveal" style="--i:4"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></span><h3>Offers on tests</h3><p>Health checkup offers and savings on everyday tests.</p></article>
-      <article class="wb-card reveal" style="--i:5"><span class="wb-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span><h3>Home collection</h3><p>Book sample collection from your home on WhatsApp.</p></article>
     </div>
   </div>
 </section>
@@ -217,7 +197,7 @@
     <div class="fb-head reveal">
       <p class="fb-eyebrow">Meet our founders</p>
       <h2 id="foundH">The hearts behind the lab</h2>
-      <p>Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging was built on one belief: every family in Chikkaballapur deserves accurate results, honest prices and a caring hand at the other end of the needle. For more than 30 years, our founders have run the lab with that promise, treating every patient like a neighbour and every report like it matters, because it does.</p>
+      <p>Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging was built on one belief: every family in Chikkaballapur deserves accurate results, honest prices and a caring hand at the other end of the needle. Our founders have run the lab with that promise, treating every patient like a neighbour and every report like it matters, because it does.</p>
     </div>
     <div class="fb-grid">
       <article class="fb-card reveal fx-left">
@@ -266,12 +246,8 @@
 <section class="sec alt" id="contact">
   <div class="wrap">
     <div class="sec-h">
-      <p class="eyebrow">CONTACT & LOCATION</p>
-      <h2>Contact Us & Visit Our Lab</h2>
-      <p>
-        Have a question about a test or offer? Contact our team or visit
-        Shiva Sathvik Diagnostic Lab for your diagnostic testing needs.
-      </p>
+      <h2>Contact Us</h2>
+      <p>Questions about a test or an offer? Call us or visit the lab.</p>
     </div>
 
     <div class="contact-grid">
@@ -279,8 +255,6 @@
       <div class="reveal">
         <div class="form-card">
           <h3>Visit Our Laboratory</h3>
-          <p><strong>Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging</strong></p>
-          <p class="walkin"><strong>Walk-ins welcome.</strong> No booking needed to visit the lab. Booking is only for home sample collection.</p>
 
           <dl class="facts">
             <div>
@@ -288,13 +262,6 @@
               <dd>
                 Behind Sadhur Matt,<br />
                 Chikkaballapur, Karnataka 562101
-              </dd>
-            </div>
-
-            <div>
-              <dt><span aria-hidden="true">📞</span> Phone</dt>
-              <dd>
-                <a href="tel:9343601092">9343601092</a>
               </dd>
             </div>
 
@@ -315,14 +282,10 @@
             </a>
 
             <a class="btn btn-o" href="tel:9343601092">
-              Call Now
+              Call
             </a>
           </div>
 
-          <p class="small">
-            Please contact the lab to confirm test availability, prices,
-            preparation instructions and report timings before visiting.
-          </p>
         </div>
       </div>
 
@@ -357,10 +320,9 @@
 <!-- 14. FOOTER -->
 <footer class="site-footer">
   <div class="wrap foot-grid">
-    <div><strong class="f-name">Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging</strong><p>Chikkaballapur.<br>Your Health, Our Priority.<br>Accurate Tests. Caring Service.</p></div>
+    <div><strong class="f-name">Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging</strong></div>
     <nav aria-label="Footer"><h4>Links</h4><a href="#home">Home</a><a href="#tests">Tests</a><a href="#offers">Offers</a></nav>
     <div><h4>Services</h4><a href="#athome">Home collection</a><a href="#faq">FAQs</a></div>
-    <div><h4>Visit</h4><p>Behind Sadhur Matt, Chikkaballapur, Karnataka 562101</p><p>Mon–Sat, 7:00 AM–8:30 PM</p><a data-phone href="#contact">Call</a></div>
   </div>
   <div class="wrap foot-note">
     <p>© <span id="year"></span> Shiva Sathvik Diagnostic Lab &amp; X-ray Imaging. All rights reserved.</p>
@@ -404,15 +366,12 @@
       <button class="btn btn-c" id="ctCancel" type="button">Cancel &amp; clear</button>
     </div>
     <p class="small" id="ctHint" role="status"></p>
-    <p class="small">Visiting the lab instead? No booking needed. Just walk in.</p>
   </div>
 </dialog>
 
 <dialog id="detail" aria-labelledby="dTitle">
   <h3 id="dTitle"></h3>
-  <p id="dDesc"></p>
   <dl class="facts" id="dFacts"></dl>
-  <p class="small">Confirm preparation, price and report time with the lab. Visiting the lab? No booking needed, just walk in.</p>
   <div class="cart-btns"><button class="btn btn-p" id="dAdd" type="button">Add to My Tests</button><button class="btn btn-o" id="dClose" type="button">Close</button></div>
 </dialog>
 <dialog id="askDialog" aria-labelledby="askT">

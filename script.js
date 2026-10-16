@@ -60,15 +60,10 @@ const REVIEWS = [   // Replace with real, permitted patient feedback when you co
   { t: "Home collection saved us a trip with a small child. The person who came was polite and careful.", w: "Patient · Home collection" }
 ];
 const FAQS = [
-  ["Do I need to fast before my test?", "Some tests need fasting and many do not. Please confirm the preparation for your test with the lab before you visit."],
-  ["How long do test reports take?", "Timing depends on the test. Please confirm the expected report time with the lab."],
-  ["Do I need to book to visit the lab?", "No. You can walk in during working hours, Monday to Saturday, 7:00 AM to 8:30 PM. Booking is only needed for home sample collection."],
-  ["How do I book home sample collection?", "Select your tests or offers, then tap Book Home Collection. It opens WhatsApp with your list ready to send, and the lab confirms your slot and whether it covers your area."],
-  ["What payment methods are accepted?", "Please ask the lab which payment methods it accepts."],
-  ["How can I access my report online?", "Your report is shared online, so you do not need to come to the lab to collect it. The lab team confirms how it reaches you when they confirm your slot on WhatsApp."],
-  ["How should I prepare for my test?", "Preparation differs by test. Follow the instructions given by your doctor and confirm details with the lab."],
-  ["Are discounts or offers available?", "Yes. See the Offers section for health checkup offers. Ask the lab which offers apply on the day you visit."],
-  ["Are senior citizen discounts available?", "Please ask the lab whether a senior citizen discount applies to your tests."]
+  ["Do I need to fast before my test?", "Some tests need fasting and many do not. Follow your doctor's instructions and confirm the preparation for your test with the lab."],
+  ["How long do test reports take?", "Timing depends on the test. Confirm the expected report time with the lab."],
+  ["What payment methods are accepted?", "Ask the lab which payment methods it accepts."],
+  ["Are senior citizen discounts available?", "Ask the lab whether a senior citizen discount applies to your tests."]
 ];
 
 /* =====================================================================
@@ -162,7 +157,7 @@ function toast(msg, linkText, href) {
 $("#year").textContent = new Date().getFullYear();
 $("#statTests").dataset.count = TESTS.length;
 $$("[data-phone]").forEach((a) => {
-  if (phoneOk) { a.href = "tel:" + phoneDigits; a.textContent = PHONE_NUMBER; if (a.classList.contains("fab")) a.textContent = "Call"; }
+  if (phoneOk) { a.href = "tel:" + phoneDigits; a.textContent = "Call"; }
   else { a.textContent = "Phone to be added"; a.removeAttribute("href"); }
 });
 
@@ -171,11 +166,11 @@ $$("[data-phone]").forEach((a) => {
    ===================================================================== */
 const MARQUEE = [
   "Trusted Diagnostic Services",
-  "Affordable Diagnostic Test Prices",
-  "Family Health Checkup Packages",
-  "Reports Delivered on WhatsApp",
-  "Home Sample Collection Available",
-  "Senior Citizen Health Packages"
+  "Blood Tests",
+  "X-ray Imaging",
+  "Urine and Stool Analysis",
+  "Serology and Hormones",
+  "Microbiology and Histopathology"
 ];
 (function marquee() {
   const track = $("#marquee");
@@ -280,7 +275,7 @@ function tweenSum(to) {
 function syncBtn(b) {
   const n = qtyOf(b.dataset.add), on = n > 0, it = getItem(b.dataset.add), was = b.dataset.on;
   b.dataset.on = on ? "1" : "0";
-  b.textContent = on ? "✓ Added" + (n > 1 ? " ×" + n : "") : "Add to My Tests";
+  b.textContent = on ? "✓ Added" + (n > 1 ? " ×" + n : "") : (b.classList.contains("rb") ? "Add" : "Add to My Tests");
   b.classList.toggle("added", on);
   b.setAttribute("aria-pressed", String(on));
   if (it) b.setAttribute("aria-label", it.name + (on ? " is in My Tests. Tap to change." : ": add to My Tests"));
@@ -366,7 +361,7 @@ function renderCart() {
   if (cart.length && waOk) { go.href = waLink(cartMessage()); go.removeAttribute("aria-disabled"); hint.hidden = true; }
   else {
     go.removeAttribute("href"); go.setAttribute("aria-disabled", "true"); hint.hidden = false;
-    hint.textContent = !cart.length ? "Select at least one test or package to continue." : "WhatsApp is not set up yet. Please call " + PHONE_NUMBER + " to book.";
+    hint.textContent = !cart.length ? "Select at least one test or package to continue." : "WhatsApp is not set up yet. Please call the lab.";
   }
   flash = null;
 }
@@ -405,10 +400,9 @@ function openDetail(id) {
   const t = TEST_MAP.get(id);
   detailId = id;
   $("#dTitle").textContent = t.name;
-  $("#dDesc").textContent = t.desc;
   const f = $("#dFacts");
   f.replaceChildren();
-  [["Category", t.cat], ["Price", rupee(t.price)], ["Preparation", "Confirm with lab"], ["Report time", "Confirm with lab"]].forEach(([k, v]) => {
+  [["Category", t.cat], ["Price", rupee(t.price)]].forEach(([k, v]) => {
     const d = h("div"); d.append(h("dt", "", k), h("dd", "", v)); f.append(d);
   });
   const da = $("#dAdd"); da.dataset.add = id; syncBtn(da);
@@ -424,10 +418,10 @@ POPULAR_TEST_IDS.forEach((id, i) => {
   const c = h("article", "card reveal");
   c.style.setProperty("--i", i % 5);
   const meta = h("ul", "meta");
-  meta.append(h("li", "", t.cat), h("li", "", "Report time: confirm with lab"));
+  meta.append(h("li", "", t.cat));
   const actions = h("div", "card-btns");
   actions.append(addBtn(id, "btn btn-p"));
-  c.append(h("span", "ico", t.catKey), (() => { const hh = h("h3"); hh.append(btn(t.name, "link-btn title-link", () => openDetail(id), "View details for " + t.name)); return hh; })(), h("p", "", t.desc), meta, h("div", "price", rupee(t.price)), actions);
+  c.append(h("span", "ico", t.catKey), (() => { const hh = h("h3"); hh.append(btn(t.name, "link-btn title-link", () => openDetail(id), "View details for " + t.name)); return hh; })(), meta, h("div", "price", rupee(t.price)), actions);
   $("#popularGrid").append(c);
 });
 
@@ -450,75 +444,60 @@ PACKAGES.forEach((p, i) => {
   $("#pkgGrid").append(c);
 });
 
-/* Catalogue: search + category tabs */
-const state = { cat: "all", q: "" };
-const tabsEl = $("#tabs");
-[["all", "All"], ...Object.entries(CATS)].forEach(([key, label]) => {
-  const b = h("button", "tab", label);
+/* Catalogue: category tiles, then a compact list. Search looks through every test. */
+const state = { cat: null, q: "", more: false };
+const tilesEl = $("#tiles"), headEl = $("#catHead");
+Object.entries(CATS).forEach(([key, label]) => {
+  const list = TESTS.filter((t) => t.catKey === key);
+  const b = h("button", "tile");
   b.type = "button"; b.dataset.cat = key;
-  b.setAttribute("role", "tab");
-  b.setAttribute("aria-selected", key === "all" ? "true" : "false");
-  b.setAttribute("aria-controls", "results");
-  b.tabIndex = key === "all" ? 0 : -1;
-  tabsEl.append(b);
+  b.append(h("span", "ico", key), h("b", "", label), h("span", "tile-n", list.length + " tests · from " + rupee(Math.min(...list.map((t) => t.price)))));
+  b.addEventListener("click", () => { setCat(key); $("#tests").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); });
+  tilesEl.append(b);
 });
 function setCat(key) {
-  state.cat = key;
-  $$(".tab", tabsEl).forEach((b) => {
-    const on = b.dataset.cat === key;
-    b.setAttribute("aria-selected", String(on));
-    b.tabIndex = on ? 0 : -1;
-  });
+  state.cat = key === "all" ? null : key;
+  state.more = false;
   renderCatalogue();
 }
-tabsEl.addEventListener("click", (e) => { const b = e.target.closest(".tab"); if (b) setCat(b.dataset.cat); });
-tabsEl.addEventListener("keydown", (e) => {
-  const tabs = $$(".tab", tabsEl);
-  const i = tabs.findIndex((b) => b.getAttribute("aria-selected") === "true");
-  let n = -1;
-  if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
-  else if (e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
-  else if (e.key === "Home") n = 0;
-  else if (e.key === "End") n = tabs.length - 1;
-  if (n < 0) return;
-  e.preventDefault();
-  setCat(tabs[n].dataset.cat);
-  tabs[n].focus();
-});
 function renderCatalogue() {
   const q = state.q.trim().toLowerCase();
-  const list = TESTS.filter((t) => (state.cat === "all" || t.catKey === state.cat) &&
-    (!q || (t.name + " " + t.cat).toLowerCase().includes(q)));
-  const out = $("#results");
-  out.replaceChildren();
+  const limit = matchMedia("(max-width:640px)").matches ? 8 : 12;
+  const out = $("#results"), count = $("#count");
+  out.replaceChildren(); headEl.replaceChildren();
+  tilesEl.hidden = !!(q || state.cat);
+  headEl.hidden = !(state.cat && !q);
+  if (!tilesEl.hidden) { count.textContent = TESTS.length + " tests in " + Object.keys(CATS).length + " categories"; return; }
+  const list = TESTS.filter((t) => (q || !state.cat || t.catKey === state.cat) && (!q || (t.name + " " + t.cat).toLowerCase().includes(q)));
+  if (!headEl.hidden) {
+    headEl.append(btn("‹ All categories", "btn btn-o back-btn", () => setCat("all")), h("strong", "", CATS[state.cat]));
+  }
+  count.textContent = list.length + (list.length === 1 ? " test" : " tests") + (q ? " found" : "");
   out.style.animation = "none"; void out.offsetWidth; out.style.animation = "";
-  $("#count").textContent = list.length + " of " + TESTS.length + " tests shown";
   if (!list.length) {
-    out.append(h("div", "empty", "No tests match your search. Try a shorter name, or choose “All” to see every category."));
+    out.append(h("div", "empty", "No tests match your search. Try a shorter name."));
     return;
   }
-  list.forEach((t) => {
+  (state.more ? list : list.slice(0, limit)).forEach((t) => {
     const r = h("article", "row");
     const name = h("div", "name");
-    name.append(btn(t.name, "link-btn", () => openDetail(t.id), "View details for " + t.name), h("br"), h("span", "tag", t.cat));
-    const meta = h("div", "meta rm");
-    meta.append(h("span", "", "Preparation and report time: confirm with lab"));
-    name.classList.add("name");
-    const price = h("b", "price rp", rupee(t.price));
-    const add = addBtn(t.id, "btn btn-o rb");
-    r.append(name, meta, price, add);
+    name.append(btn(t.name, "link-btn", () => openDetail(t.id), "View details for " + t.name));
+    if (q) name.append(h("br"), h("span", "tag", t.cat));
+    r.append(name, h("b", "price rp", rupee(t.price)), addBtn(t.id, "btn btn-o rb"));
     out.append(r);
   });
+  if (!state.more && list.length > limit) {
+    out.append(btn("Show " + (list.length - limit) + " more", "btn btn-o show-more", () => { state.more = true; renderCatalogue(); }));
+  }
 }
-$("#q").addEventListener("input", (e) => { state.q = e.target.value; renderCatalogue(); });
+$("#q").addEventListener("input", (e) => { state.q = e.target.value; state.more = false; renderCatalogue(); });
+renderCatalogue();
 /* Open the catalogue dropdown and jump to it, optionally with a search term */
 function openCatalogue(term) {
-  $("#testsDropdown").open = true;
   if (term != null) { $("#q").value = term; state.q = term; setCat("all"); }
   $("#tests").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
 }
 $$('a[href="#tests"]').forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); openCatalogue(); }));
-if (location.hash === "#tests") $("#testsDropdown").open = true;
 
 /* Hero search: live suggestions while typing, Enter goes to the catalogue */
 const heroQ = $("#heroQ"), suggest = $("#heroSuggest");
@@ -769,7 +748,6 @@ if ("IntersectionObserver" in window && !reduceMotion) {
     o.unobserve(en.target);
   }), { threshold: 0.4 });
   so.observe($(".stats"));
-  so.observe($(".wb-pills"));
 } else {
   $$(".reveal").forEach((el) => el.classList.add("in"));
   $$("[data-count]").forEach(countUp);
